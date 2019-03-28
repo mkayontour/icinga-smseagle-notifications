@@ -12,7 +12,7 @@ ap.add_argument("-H","--hostname", required=True, help="Hostname of notified pro
 ap.add_argument("-t","--notification-type", required=True, help="Icinga Notification type")
 ap.add_argument("-s","--state", required=True, help="Service /Host state")
 ap.add_argument("-o","--output", help="Output for Host notifications / Normal Service Output could be to long!")
-ap.add_argument("-S","--service", required=True help="If notification is type service")
+ap.add_argument("-S","--service", help="If notification is type service")
 ap.add_argument("-e","--eaglehost", required=True, help="SMSEagle HTTP API Host")
 ap.add_argument("-P","--protocol", default="http", help="set http protocol: DEFAULT=http")
 ap.add_argument("-d","--date", required=True, help="display longdatae output from icinga in sms")
