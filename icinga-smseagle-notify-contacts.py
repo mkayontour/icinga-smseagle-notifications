@@ -20,13 +20,12 @@ ap.add_argument("-v","--verbose", help="print verbose messages", action='store_t
 ap.add_argument("-V","--version", help="print version", action='store_true')
 args = vars(ap.parse_args())
 
-
 if args['service']:
-    message = '** Service Monitoring on ' + args['hostname'] + '**\n'
+    message = '** Service ' + args['notification_type'] + ' on ' + args['hostname'] + '**\n'
     message += args['service'] + ' on ' + args['hostname'] + ' is ' + args['state'] + '! \n'
     message += 'Date: ' + args['date']
 else:
-    message = '** Host Monitoring ** \n'
+    message = '** Host ' + args['notification_type'] + ' ** \n'
     message += args['hostname'] + ' is ' + args['state'] + '! \n'
     message += 'Output: ' + args['output'] + '\n'
     message += 'Date: ' + args['date']
