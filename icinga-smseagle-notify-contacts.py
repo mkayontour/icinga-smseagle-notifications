@@ -76,7 +76,7 @@ if args['verbose']:
 
 # SMSEagle Response
 if 'OK' in result:
-        print 'Message sent succesfully to ' + args['contactname'] + '\n'
+        print 'Message sent succesfully\n'
         sys.exit(0)
 else:
         print 'Sending SMS failed: ' + result + '\n'
