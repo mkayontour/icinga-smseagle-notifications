@@ -10,7 +10,7 @@ ap.add_argument("-u", "--username", required=True,
                 help="Username of SMSEagle HTTP API")
 ap.add_argument("-p", "--password", required=True,
                 help="Password for username SMSEagle HTTP API")
-ap.add_argument("-c", "--contactname", required=True,
+ap.add_argument("-c", "--contactname",
                 help="Contact defined in addressbook of SMSEagle")
 ap.add_argument("-H", "--hostname", required=True,
                 help="Hostname of notified problem")
@@ -27,6 +27,9 @@ ap.add_argument("-P", "--protocol", default="http",
                 help="set http protocol: DEFAULT=http")
 ap.add_argument("-d", "--date", required=True,
                 help="display longdatae output from icinga in sms")
+ap.add_argument("-g", "--send_togroup", action='store_true',
+                help="Send to group instead to user")
+ap.add_argument("-n", "--group_name", help="Group name to send to")
 ap.add_argument("-v", "--verbose", action='store_true',
                 help="print verbose messages")
 ap.add_argument("-V", "--version", help="print version", action='store_true')
@@ -47,9 +50,15 @@ if args['verbose']:
 
 # Build the url query
 base_url = args['protocol'] + '://' + args['eaglehost']
-base_url += '/index.php/http_api/send_tocontact'
-query_args = {'login': args['username'], 'pass': args['password'],
-              'contactname': args['contactname'], 'message': message}
+
+if args['send_togroup']:
+    base_url += '/index.php/http_api/send_togroup'
+    query_args = {'login': args['username'], 'pass': args['password'],
+                  'groupname': args['group_name'], 'message': message}
+else:
+    base_url += '/index.php/http_api/send_tocontact'
+    query_args = {'login': args['username'], 'pass': args['password'],
+                  'contactname': args['contactname'], 'message': message}
 encoded_args = urllib.urlencode(query_args)
 
 if args['verbose']:
